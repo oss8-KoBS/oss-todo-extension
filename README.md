@@ -17,9 +17,9 @@ This app includes following features.
 ## Terms to use
 This project is under `Apache License 2.0`.
 
-facebook/react - `MIT License`
-facebookexperimental/Recoil - `MIT License`
-framer/motion - `MIT License`
-styled-components/styled-components - `MIT License`
-polemius/recoil-persist - `MIT License`
-atlassian/react-beautiful-dnd - `Apache License 2.0`
+- facebook/react - `MIT License`
+- facebookexperimental/Recoil - `MIT License`
+- framer/motion - `MIT License`
+- styled-components/styled-components - `MIT License`
+- polemius/recoil-persist - `MIT License`
+- atlassian/react-beautiful-dnd - `Apache License 2.0`
