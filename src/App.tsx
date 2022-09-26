@@ -1,17 +1,19 @@
 import { AnimatePresence, motion, Variants } from "framer-motion";
-import { useRecoilState } from "recoil";
-import styled, { createGlobalStyle } from "styled-components";
+import { useRecoilValue } from "recoil";
+import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 import { navState } from "./atoms";
+import { defaultTheme } from "./theme";
 import Navigator from "./Components/Navigator";
 import ClockApp from "./Routes/ClockApp";
 import ThemeApp from "./Routes/ThemeApp";
 import TodoApp from "./Routes/TodoApp";
 
 const GlobalStyle = createGlobalStyle`
-  /* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
+  /** 
+   *http://meyerweb.com/eric/tools/css/reset/ 
+   *v2.0 | 20110126
+   *License: none (public domain)
+   */
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -61,6 +63,16 @@ table {
 * {
   box-sizing: border-box;
 	font-family: 'Baloo Thambi 2', 'Nanum Gothic Coding', Verdana;
+	-webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none;
+}
+img {
+	-webkit-user-drag: none;
+ 	-khtml-user-drag: none;
+ 	-moz-user-drag: none;
+ 	-o-user-drag: none;
 }
 body {
   background-color: ${(props) => props.theme.bgColor};
@@ -109,10 +121,10 @@ const AppWrapperVariants: Variants = {
 };
 
 function App() {
-  const [currentNav, setCurrentNav] = useRecoilState(navState);
+  const currentNav = useRecoilValue(navState);
 
   return (
-    <>
+    <ThemeProvider theme={defaultTheme}>
       <GlobalStyle />
       <Wrapper>
         <AnimatePresence>
@@ -152,7 +164,7 @@ function App() {
           )}
         </AnimatePresence>
       </Wrapper>
-    </>
+    </ThemeProvider>
   );
 }
 
