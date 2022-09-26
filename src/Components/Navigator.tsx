@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { navState } from "../atoms";
@@ -26,7 +27,7 @@ const ButtonTitle = styled.h1`
   align-items: center;
   color: white;
 `;
-const ButtonIndicator = styled.div`
+const ButtonIndicator = styled(motion.div)`
   width: 100px;
   height: 2px;
   background-color: red;
@@ -39,15 +40,21 @@ function Navigator() {
     <Wrapper>
       <ButtonWrapper onClick={() => setCurrentNav("THEME")}>
         <ButtonTitle>Theme</ButtonTitle>
-        <ButtonIndicator />
+        {currentNav === "THEME" ? (
+          <ButtonIndicator layoutId="indicator" />
+        ) : null}
       </ButtonWrapper>
       <ButtonWrapper onClick={() => setCurrentNav("TODO")}>
         <ButtonTitle>Todo</ButtonTitle>
-        <ButtonIndicator />
+        {currentNav === "TODO" ? (
+          <ButtonIndicator layoutId="indicator" />
+        ) : null}
       </ButtonWrapper>
       <ButtonWrapper onClick={() => setCurrentNav("CLOCK")}>
         <ButtonTitle>Clock</ButtonTitle>
-        <ButtonIndicator />
+        {currentNav === "CLOCK" ? (
+          <ButtonIndicator layoutId="indicator" />
+        ) : null}
       </ButtonWrapper>
     </Wrapper>
   );

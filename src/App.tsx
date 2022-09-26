@@ -1,3 +1,4 @@
+import { AnimatePresence, motion, Variants } from "framer-motion";
 import { useRecoilState } from "recoil";
 import styled, { createGlobalStyle } from "styled-components";
 import { navState } from "./atoms";
@@ -11,7 +12,6 @@ const GlobalStyle = createGlobalStyle`
    v2.0 | 20110126
    License: none (public domain)
 */
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -31,6 +31,7 @@ time, mark, audio, video {
 	border: 0;
 	font-size: 100%;
 	font: inherit;
+	font-family: 'Baloo Thambi 2', 'Nanum Gothic Coding', Verdana;
 	vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
@@ -59,7 +60,7 @@ table {
 
 * {
   box-sizing: border-box;
-  font-family: 'Source Sans Pro', sans-serif;
+	font-family: 'Baloo Thambi 2', 'Nanum Gothic Coding', Verdana;
 }
 body {
   background-color: ${(props) => props.theme.bgColor};
@@ -76,6 +77,36 @@ const Wrapper = styled.div`
   height: 100vh;
   padding-top: 50px;
 `;
+const MotionWrapper = styled(motion.div)`
+  width: 100vw;
+  height: calc(100vh - 50px);
+  position: fixed;
+  top: 50px;
+`;
+
+const AppWrapperVariants: Variants = {
+  init: {
+    opacity: 0,
+    transition: {
+      duration: 0.3,
+      type: "tween",
+    },
+  },
+  ani: {
+    opacity: 1,
+    transition: {
+      duration: 0.3,
+      type: "tween",
+    },
+  },
+  exit: {
+    opacity: 0,
+    transition: {
+      duration: 0.3,
+      type: "tween",
+    },
+  },
+};
 
 function App() {
   const [currentNav, setCurrentNav] = useRecoilState(navState);
@@ -84,16 +115,42 @@ function App() {
     <>
       <GlobalStyle />
       <Wrapper>
-        <Navigator />
-        {currentNav === "TODO" ? (
-          <TodoApp />
-        ) : currentNav === "THEME" ? (
-          <ThemeApp />
-        ) : currentNav === "CLOCK" ? (
-          <ClockApp />
-        ) : (
-          <h1>Wrong Access</h1>
-        )}
+        <AnimatePresence>
+          <Navigator />
+          {currentNav === "TODO" ? (
+            <MotionWrapper
+              key="TodoApp"
+              variants={AppWrapperVariants}
+              initial="init"
+              animate="ani"
+              exit="exit"
+            >
+              <TodoApp />
+            </MotionWrapper>
+          ) : currentNav === "THEME" ? (
+            <MotionWrapper
+              key="ThemeApp"
+              variants={AppWrapperVariants}
+              initial="init"
+              animate="ani"
+              exit="exit"
+            >
+              <ThemeApp />
+            </MotionWrapper>
+          ) : currentNav === "CLOCK" ? (
+            <MotionWrapper
+              key="ClockApp"
+              variants={AppWrapperVariants}
+              initial="init"
+              animate="ani"
+              exit="exit"
+            >
+              <ClockApp />
+            </MotionWrapper>
+          ) : (
+            <h1>Wrong Access</h1>
+          )}
+        </AnimatePresence>
       </Wrapper>
     </>
   );
