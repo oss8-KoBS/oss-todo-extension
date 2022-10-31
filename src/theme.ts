@@ -3,12 +3,12 @@ import { DefaultTheme } from "styled-components";
 export const defaultTheme: DefaultTheme = {
   textColor: "#000000",
 
-  bgColor: "#FDFDBD",
+  bgColor: "#3F8CF2",
 
-  boardColor: "#F8C4B4",
-  startBoardColor: "#FF8787",
-  dropBoardColor: "#E5EBB2",
+  boardColor: "#DADFE9",
+  startBoardColor: "#B2BEC3",
+  dropBoardColor: "#BFD6C9",
 
-  cardColor: "#FF8787",
-  dragCardColor: "#FF6464",
+  cardColor: "#FFFFFF",
+  dragCardColor: "#74B9FF",
 };
