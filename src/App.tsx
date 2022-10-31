@@ -76,7 +76,7 @@ img {
 }
 body {
   background-color: ${(props) => props.theme.bgColor};
-  color: black;
+  color: ${(props) => props.theme.textColor};
 }
 a {
   text-decoration: none;

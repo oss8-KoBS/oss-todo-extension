@@ -25,12 +25,12 @@ const ButtonTitle = styled.h1`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white;
+  color: ${(props) => props.theme.textColor};
 `;
 const ButtonIndicator = styled(motion.div)`
   width: 100px;
   height: 2px;
-  background-color: red;
+  background-color: ${(props) => props.theme.cardColor};
 `;
 
 function Navigator() {
