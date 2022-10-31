@@ -9,7 +9,11 @@ import Card from "./Card";
 const BoardWrapper = styled.div<{ isDragging: boolean }>`
   width: 300px;
   min-height: 300px;
+  display: flex;
+  flex-direction: column;
   margin: 5px;
+  padding: 10px 0;
+  border-radius: 5px;
 
   background-color: ${(props) =>
     props.isDragging ? props.theme.cardColor : props.theme.boardColor};
@@ -29,9 +33,8 @@ interface IAreaProps {
   draggingFromThisWith: boolean;
 }
 const CardDropArea = styled.div<IAreaProps>`
-  display: flex;
-  flex-direction: column;
   flex-grow: 1;
+  padding: 20px;
 
   background-color: ${(props) =>
     props.isDraggingOver

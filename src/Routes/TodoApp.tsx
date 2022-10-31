@@ -41,7 +41,7 @@ function TodoApp() {
 
   return (
     <Wrapper>
-      <DragDropContext onDragEnd={onDragEnd} onBeforeDragStart={onDragStart}>
+      <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
         <Droppable
           droppableId="Boards_EF9026D"
           direction="horizontal"
