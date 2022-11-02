@@ -6,7 +6,7 @@ import {
 } from "react-beautiful-dnd";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
-import { dragBoard, toDoState } from "../atoms";
+import { dragBoard, IToDoState, toDoState } from "../atoms";
 import Board from "../Components/TodoApp/Board";
 
 const Wrapper = styled.div`
@@ -31,6 +31,61 @@ function TodoApp() {
   const [toDos, setToDos] = useRecoilState(toDoState);
   const [isDragBoard, setIsDragBoard] = useRecoilState(dragBoard);
   const onDragEnd = (info: DropResult) => {
+    const { destination, source } = info;
+    if (!destination) return;
+
+    if (!isDragBoard) {
+      // dragging card
+      if (destination.droppableId === source.droppableId) {
+        // same board movement
+        setToDos((prev) => {
+          const boardCopy = [...prev[source.droppableId]];
+          const [popTodo] = boardCopy.splice(source.index, 1);
+          boardCopy.splice(destination?.index, 0, popTodo);
+          return {
+            ...prev,
+            [source.droppableId]: boardCopy,
+          };
+        });
+      }
+      if (destination.droppableId !== source.droppableId) {
+        // cross board movement
+        setToDos((prev) => {
+          const sourceBoardCopy = [...prev[source.droppableId]];
+          const popTodo = sourceBoardCopy[source.index];
+          const destBoardCopy = [...prev[destination.droppableId]];
+          sourceBoardCopy.splice(source.index, 1);
+          destBoardCopy.splice(destination?.index, 0, popTodo);
+          return {
+            ...prev,
+            [source.droppableId]: sourceBoardCopy,
+            [destination.droppableId]: destBoardCopy,
+          };
+        });
+      }
+    } else {
+      // dragging board
+      setToDos((prev) => {
+        const newBoardsKeys = Object.keys(prev).filter(
+          (key) => key != Object.keys(prev)[source.index]
+        );
+        let newBoards: IToDoState = {};
+        for (let i = 0; i < newBoardsKeys.length; i++) {
+          if (i == destination.index) {
+            newBoards[Object.keys(prev)[source.index]] =
+              prev[Object.keys(prev)[source.index]];
+          }
+          newBoards[newBoardsKeys[i]] = prev[newBoardsKeys[i]];
+        }
+        if (destination.index === newBoardsKeys.length) {
+          newBoards[Object.keys(prev)[source.index]] =
+            prev[Object.keys(prev)[source.index]];
+        }
+
+        return newBoards;
+      });
+    }
+
     setIsDragBoard(true);
   };
   const onDragStart = (info: DragStart) => {

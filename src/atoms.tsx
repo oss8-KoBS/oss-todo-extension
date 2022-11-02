@@ -21,7 +21,7 @@ export interface IToDo {
   // expDate == null, expire date is not set.
   expDate: Date | null;
 }
-interface IToDoState {
+export interface IToDoState {
   [key: string]: IToDo[];
 }
 export const toDoState = atom<IToDoState>({
