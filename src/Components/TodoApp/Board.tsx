@@ -19,7 +19,6 @@ const BoardWrapper = styled.div<{ isDragging: boolean }>`
     props.isDragging ? props.theme.cardColor : props.theme.boardColor};
   box-shadow: ${(props) =>
     props.isDragging ? "0px 2px 5px rgba(0, 0, 0, 0.5)" : "none"};
-  transition: background-color 0.3s ease-out;
 `;
 const Title = styled.h2`
   text-align: center;
