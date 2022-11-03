@@ -1,13 +1,13 @@
 import React from "react";
-import { useRecoilState } from "recoil";
-import { dragBoard, IToDo } from "../../atoms";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { dragBoard, IToDo, toDoState } from "../../atoms";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import Card from "./Card";
 
 const BoardWrapper = styled.div<{ isDragging: boolean }>`
-  width: 300px;
+  min-width: 300px;
   min-height: 300px;
   display: flex;
   flex-direction: column;
@@ -25,6 +25,12 @@ const Title = styled.h2`
   font-weight: 600;
   margin-bottom: 10px;
   font-size: 18px;
+`;
+const InputForm = styled.form`
+  width: 100%;
+  & > input {
+    width: 100%;
+  }
 `;
 
 interface IAreaProps {
@@ -53,10 +59,20 @@ interface IForm {
   toDo: string;
 }
 function Board({ boardId, boardIdx, toDos }: IBoardProps) {
-  const [isDragBoard, setIsBoardDropDisable] = useRecoilState(dragBoard);
+  const setToDos = useSetRecoilState(toDoState);
+  const isDragBoard = useRecoilValue(dragBoard);
   const { register, setValue, handleSubmit } = useForm<IForm>();
   const onValid = ({ toDo }: IForm) => {
-    //TODO: add todo list
+    const newToDo: IToDo = {
+      id: Date.now(),
+      text: toDo,
+      expDate: null,
+    };
+    setToDos((prev) => ({
+      ...prev,
+      [boardId]: [newToDo, ...prev[boardId]],
+    }));
+    setValue("toDo", "");
   };
 
   return (
@@ -69,6 +85,13 @@ function Board({ boardId, boardIdx, toDos }: IBoardProps) {
           {...boardProvided.dragHandleProps}
         >
           <Title>{boardId}</Title>
+          <InputForm onSubmit={handleSubmit(onValid)}>
+            <input
+              {...register("toDo", { required: true })}
+              type="text"
+              placeholder={`Add task on ${boardId}`}
+            />
+          </InputForm>
           <Droppable droppableId={boardId} isDropDisabled={isDragBoard}>
             {(cardProvider, cardSnapshot) => (
               <CardDropArea
