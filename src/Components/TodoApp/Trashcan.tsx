@@ -1,3 +1,4 @@
+import React from "react";
 import { Droppable } from "react-beautiful-dnd";
 import styled from "styled-components";
 
@@ -8,6 +9,7 @@ const Wrapper = styled.div<{ isVisible: boolean }>`
   position: fixed;
   top: 0;
   right: 0;
+  z-index: 2;
   pointer-events: ${(props) => (props.isVisible ? "all" : "none")};
   opacity: ${(props) => (props.isVisible ? 1 : 0)};
   transition: opacity 0.3s ease-in-out;
@@ -51,4 +53,4 @@ function Trashcan({ isVisible }: ITrashcan) {
   );
 }
 
-export default Trashcan;
+export default React.memo(Trashcan);

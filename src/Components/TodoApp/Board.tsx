@@ -1,6 +1,6 @@
 import React from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { dragBoard, IToDo, toDoState } from "../../atoms";
+import { dragBoard, IToDo, IToDoState, toDoState } from "../../atoms";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import { Draggable, Droppable } from "react-beautiful-dnd";
@@ -14,6 +14,7 @@ const BoardWrapper = styled.div<{ isDragging: boolean }>`
   margin: 5px;
   padding: 10px 0;
   border-radius: 5px;
+  position: relative;
 
   background-color: ${(props) =>
     props.isDragging ? props.theme.cardColor : props.theme.boardColor};
@@ -21,10 +22,24 @@ const BoardWrapper = styled.div<{ isDragging: boolean }>`
     props.isDragging ? "0px 2px 5px rgba(0, 0, 0, 0.5)" : "none"};
 `;
 const Title = styled.h2`
+  height: 20px;
   text-align: center;
   font-weight: 600;
   margin-bottom: 10px;
   font-size: 18px;
+`;
+const DelBtn = styled.button`
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-top-right-radius: 5px;
+  background-color: tomato;
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+  position: absolute;
+  top: 0;
+  right: 0;
 `;
 const InputForm = styled.form`
   width: 100%;
@@ -74,6 +89,16 @@ function Board({ boardId, boardIdx, toDos }: IBoardProps) {
     }));
     setValue("toDo", "");
   };
+  const onDelClicked = () => {
+    setToDos((prev) => {
+      const newBoardsKeys = Object.keys(prev).filter((key) => key !== boardId);
+      let newBoards: IToDoState = {};
+      for (let i = 0; i < newBoardsKeys.length; i++) {
+        newBoards[newBoardsKeys[i]] = prev[newBoardsKeys[i]];
+      }
+      return newBoards;
+    });
+  };
 
   return (
     <Draggable draggableId={boardId} index={boardIdx}>
@@ -85,6 +110,7 @@ function Board({ boardId, boardIdx, toDos }: IBoardProps) {
           {...boardProvided.dragHandleProps}
         >
           <Title>{boardId}</Title>
+          <DelBtn onClick={onDelClicked}>-</DelBtn>
           <InputForm onSubmit={handleSubmit(onValid)}>
             <input
               {...register("toDo", { required: true })}

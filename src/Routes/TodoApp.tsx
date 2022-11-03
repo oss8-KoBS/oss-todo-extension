@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import {
   DragDropContext,
   DragStart,
@@ -7,7 +7,8 @@ import {
 } from "react-beautiful-dnd";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
-import { dragBoard, IToDoState, toDoState } from "../atoms";
+import { addBoardDialog, dragBoard, IToDoState, toDoState } from "../atoms";
+import AddBoard from "../Components/TodoApp/AddBoard";
 import Board from "../Components/TodoApp/Board";
 import Trashcan from "../Components/TodoApp/Trashcan";
 
@@ -32,6 +33,11 @@ const AddBtn = styled.button`
   position: fixed;
   top: 5px;
   right: 20px;
+  z-index: 1;
+  &:hover {
+    filter: brightness(80%);
+  }
+  transition: filter 0.3s ease-out;
 `;
 
 interface IAreaProps {
@@ -44,13 +50,14 @@ const BoardDropArea = styled.div<IAreaProps>`
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
-  padding: 10px 30px;
+  padding: 10px 10px;
 `;
 
 function TodoApp() {
   const [toDos, setToDos] = useRecoilState(toDoState);
   const [isDragBoard, setIsDragBoard] = useRecoilState(dragBoard);
   const [trashVisible, setTrashVisible] = useState(false);
+  const [isViewDialog, setIsViewDialog] = useRecoilState(addBoardDialog);
   const onDragEnd = (info: DropResult) => {
     const { destination, source } = info;
     if (!destination) return;
@@ -136,8 +143,9 @@ function TodoApp() {
 
   return (
     <Wrapper>
+      {isViewDialog ? <AddBoard /> : null}
       <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
-        <AddBtn>+</AddBtn>
+        <AddBtn onClick={() => setIsViewDialog(true)}>+</AddBtn>
         <Trashcan isVisible={trashVisible} />
         <BoardsWrapper>
           <Droppable
@@ -172,4 +180,4 @@ function TodoApp() {
   );
 }
 
-export default TodoApp;
+export default React.memo(TodoApp);

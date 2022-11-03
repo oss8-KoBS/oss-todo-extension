@@ -41,3 +41,8 @@ export const dragBoard = atom<boolean>({
   key: "dragBoard",
   default: true,
 });
+
+export const addBoardDialog = atom<boolean>({
+  key: "addBoardDialog",
+  default: false,
+});
