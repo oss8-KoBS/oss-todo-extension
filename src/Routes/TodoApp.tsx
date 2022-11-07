@@ -7,9 +7,16 @@ import {
 } from "react-beautiful-dnd";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
-import { addBoardDialog, dragBoard, IToDoState, toDoState } from "../atoms";
+import {
+  addBoardDialog,
+  dragBoard,
+  editCardDialog,
+  IToDoState,
+  toDoState,
+} from "../atoms";
 import AddBoard from "../Components/TodoApp/AddBoard";
 import Board from "../Components/TodoApp/Board";
+import EditCard from "../Components/TodoApp/EditCard";
 import Trashcan from "../Components/TodoApp/Trashcan";
 
 const Wrapper = styled.div`
@@ -57,7 +64,10 @@ function TodoApp() {
   const [toDos, setToDos] = useRecoilState(toDoState);
   const [isDragBoard, setIsDragBoard] = useRecoilState(dragBoard);
   const [trashVisible, setTrashVisible] = useState(false);
-  const [isViewDialog, setIsViewDialog] = useRecoilState(addBoardDialog);
+  const [isViewBoardDialog, setIsViewBoardDialog] =
+    useRecoilState(addBoardDialog);
+  const [isViewCardDialog, setIsViewCardDialog] =
+    useRecoilState(editCardDialog);
   const onDragEnd = (info: DropResult) => {
     const { destination, source } = info;
     if (!destination) return;
@@ -143,9 +153,10 @@ function TodoApp() {
 
   return (
     <Wrapper>
-      {isViewDialog ? <AddBoard /> : null}
+      {isViewBoardDialog ? <AddBoard /> : null}
+      {isViewCardDialog ? <EditCard /> : null}
       <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
-        <AddBtn onClick={() => setIsViewDialog(true)}>+</AddBtn>
+        <AddBtn onClick={() => setIsViewBoardDialog(true)}>+</AddBtn>
         <Trashcan isVisible={trashVisible} />
         <BoardsWrapper>
           <Droppable

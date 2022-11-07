@@ -1,8 +1,12 @@
 import React from "react";
 import { Draggable } from "react-beautiful-dnd";
+import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
+import { editCardDialog } from "../../atoms";
 
 const CardWrapper = styled.div<{ isDragging: boolean }>`
+  max-width: 260px;
+  word-break: break-all;
   border-radius: 5px;
   margin-bottom: 5px;
   padding: 10px;
@@ -19,10 +23,15 @@ interface ICardProps {
   cardText: string;
 }
 function Card({ cardId, cardIdx, cardText }: ICardProps) {
+  const setIsViewDialog = useSetRecoilState(editCardDialog);
+  const onClick = () => {
+    setIsViewDialog(cardId);
+  };
   return (
     <Draggable draggableId={cardId + ""} index={cardIdx}>
       {(cardProvided, cardInSnapshot) => (
         <CardWrapper
+          onClick={onClick}
           isDragging={cardInSnapshot.isDragging}
           ref={cardProvided.innerRef}
           {...cardProvided.draggableProps}
