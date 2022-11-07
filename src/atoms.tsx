@@ -46,3 +46,8 @@ export const addBoardDialog = atom<boolean>({
   key: "addBoardDialog",
   default: false,
 });
+
+export const editCardDialog = atom<number | null>({
+  key: "editCardDialog",
+  default: null,
+});
