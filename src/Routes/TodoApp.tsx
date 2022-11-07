@@ -6,7 +6,7 @@ import {
   Droppable,
   DropResult,
 } from "react-beautiful-dnd";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
 import {
   addBoardDialog,
@@ -87,14 +87,13 @@ function TodoApp() {
   const [trashVisible, setTrashVisible] = useState(false);
   const [isViewBoardDialog, setIsViewBoardDialog] =
     useRecoilState(addBoardDialog);
-  const [isViewCardDialog, setIsViewCardDialog] =
-    useRecoilState(editCardDialog);
+  const isViewCardDialog = useRecoilValue(editCardDialog);
   const onDragEnd = (info: DropResult) => {
     const { destination, source } = info;
     if (!destination) return;
 
     // dragging card
-    if (!isDragBoard) {
+    if (isDragCard) {
       // remove card
       if (destination.droppableId === "Trashcan_DBBEE57") {
         setToDos((prev) => {
@@ -135,8 +134,9 @@ function TodoApp() {
           });
         }
       }
-    } else {
-      // dragging board
+    }
+    // dragging board
+    if (isDragBoard) {
       if (destination.droppableId === "Boards_DBBEE57") {
         setToDos((prev) => {
           const newBoardsKeys = Object.keys(prev).filter(
@@ -161,13 +161,16 @@ function TodoApp() {
     }
 
     setIsDragBoard(true);
+    setIsDragCard(true);
     setTrashVisible(false);
   };
   const onDragStart = (info: DragStart) => {
     if (info.source.droppableId === "Boards_DBBEE57") {
       setIsDragBoard(true);
+      setIsDragCard(false);
     } else {
       setIsDragBoard(false);
+      setIsDragCard(true);
       setTrashVisible(true);
     }
   };

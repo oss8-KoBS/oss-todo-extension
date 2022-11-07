@@ -1,6 +1,6 @@
 import React from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { dragBoard, IToDo, IToDoState, toDoState } from "../../atoms";
+import { dragCard, IToDo, IToDoState, toDoState } from "../../atoms";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import { Draggable, Droppable } from "react-beautiful-dnd";
@@ -75,7 +75,7 @@ interface IForm {
 }
 function Board({ boardId, boardIdx, toDos }: IBoardProps) {
   const setToDos = useSetRecoilState(toDoState);
-  const isDragBoard = useRecoilValue(dragBoard);
+  const isDragCard = useRecoilValue(dragCard);
   const { register, setValue, handleSubmit } = useForm<IForm>();
   const onValid = ({ toDo }: IForm) => {
     const newToDo: IToDo = {
@@ -118,7 +118,7 @@ function Board({ boardId, boardIdx, toDos }: IBoardProps) {
               placeholder={`Add task on ${boardId}`}
             />
           </InputForm>
-          <Droppable droppableId={boardId} isDropDisabled={isDragBoard}>
+          <Droppable droppableId={boardId} isDropDisabled={!isDragCard}>
             {(cardProvider, cardSnapshot) => (
               <CardDropArea
                 isDraggingOver={cardSnapshot.isDraggingOver}
