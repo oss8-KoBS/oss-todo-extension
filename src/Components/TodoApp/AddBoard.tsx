@@ -1,21 +1,10 @@
 import React, { useState } from "react";
 import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
+import { motion, Variants } from "framer-motion";
 import { addBoardDialog, toDoState } from "../../atoms";
 
-const Wrapper = styled.div`
-  width: 100vw;
-  height: 100vh;
-  background-color: #00000050;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  right: 0;
-  z-index: 3;
-`;
-const Dialog = styled.div`
+const Dialog = styled(motion.div)`
   width: 500px;
   height: 300px;
   display: flex;
@@ -23,13 +12,13 @@ const Dialog = styled.div`
   justify-content: space-between;
   align-items: center;
   border-radius: 10px;
-  background-color: ${(props) => props.theme.boardColor};
+  background: linear-gradient(#00000090, #00000000);
   position: relative;
 `;
 const Title = styled.h2`
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 700;
-  color: ${(props) => props.theme.textColor};
+  color: white;
   margin-top: 10px;
 `;
 const InputName = styled.input`
@@ -37,6 +26,16 @@ const InputName = styled.input`
   height: 50px;
   display: flex;
   align-items: center;
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid white;
+  outline: none;
+  &::placeholder {
+    color: #ffffff90;
+  }
 `;
 const BtnWrapper = styled.div`
   width: 100%;
@@ -49,26 +48,42 @@ const Button = styled.button`
   width: 230px;
   height: 50px;
   border: none;
-  border-radius: 10px;
+  border-radius: 15px;
   font-size: 18px;
   color: white;
-  &:hover {
-    filter: brightness(80%);
-  }
-  transition: filter 0.3s ease-out;
+  transition: border 0.3s ease-out;
 `;
 const Obutton = styled(Button)`
   background-color: #54bab9;
+  border: 1px solid #54bab9;
+  &:hover {
+    border: 2px solid white;
+  }
 `;
 const NButton = styled(Button)`
-  background-color: #ff9f9f;
+  background-color: tomato;
+  border: 1px solid tomato;
+  &:hover {
+    border: 2px solid white;
+  }
 `;
 const AlertText = styled.span`
+  width: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 15px;
+  background: linear-gradient(90deg, #00000000, #00000050, #00000000);
   color: tomato;
   position: absolute;
   top: 170px;
 `;
+
+const AddBoardVariants: Variants = {
+  init: { scale: 0 },
+  ani: { scale: 1 },
+  exit: { scale: 0, opacity: 0 },
+};
 
 function AddBoard() {
   const setIsViewDialog = useSetRecoilState(addBoardDialog);
@@ -94,23 +109,29 @@ function AddBoard() {
     }
   };
   return (
-    <Wrapper>
-      <Dialog>
-        <Title>Add a new table</Title>
-        <form onSubmit={createHandler}>
-          <InputName
-            type="text"
-            placeholder="Please type a new table name"
-            onChange={onChangeHandler}
-          />
-        </form>
-        {isAlert ? <AlertText>Please enter table name</AlertText> : null}
-        <BtnWrapper>
-          <NButton onClick={() => setIsViewDialog(false)}>Cancel</NButton>
-          <Obutton onClick={createHandler}>Create</Obutton>
-        </BtnWrapper>
-      </Dialog>
-    </Wrapper>
+    <Dialog
+      key="AddBoard"
+      variants={AddBoardVariants}
+      transition={{ type: "spring", stiffness: 120, damping: 10 }}
+      initial="init"
+      animate="ani"
+      exit="exit"
+    >
+      <Title>Add a new table</Title>
+      <form onSubmit={createHandler}>
+        <InputName
+          type="text"
+          placeholder="Please type a new table name"
+          onChange={onChangeHandler}
+          autoComplete="off"
+        />
+      </form>
+      {isAlert ? <AlertText>Please enter table name</AlertText> : null}
+      <BtnWrapper>
+        <NButton onClick={() => setIsViewDialog(false)}>Cancel</NButton>
+        <Obutton onClick={createHandler}>Create</Obutton>
+      </BtnWrapper>
+    </Dialog>
   );
 }
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { dragBoard, IToDo, IToDoState, toDoState } from "../../atoms";
+import { dragCard, IToDo, IToDoState, toDoState } from "../../atoms";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import { Draggable, Droppable } from "react-beautiful-dnd";
@@ -33,18 +33,33 @@ const DelBtn = styled.button`
   height: 40px;
   border: none;
   border-top-right-radius: 5px;
-  background-color: tomato;
-  color: white;
+  background-color: transparent;
+  color: tomato;
   font-size: 20px;
   font-weight: 700;
   position: absolute;
   top: 0;
   right: 0;
+  &:hover {
+    background-color: tomato;
+    color: white;
+  }
+  transition: background-color 0.3s ease-out, color 0.3s ease-out;
 `;
 const InputForm = styled.form`
   width: 100%;
   & > input {
     width: 100%;
+    height: 30px;
+    padding: 0 7px;
+    color: ${(props) => props.theme.textColor};
+    background-color: ${(props) => props.theme.cardColor};
+    border: none;
+    outline: none;
+    &::placeholder {
+      color: ${(props) => props.theme.textColor};
+      opacity: 0.5;
+    }
   }
 `;
 
@@ -75,7 +90,7 @@ interface IForm {
 }
 function Board({ boardId, boardIdx, toDos }: IBoardProps) {
   const setToDos = useSetRecoilState(toDoState);
-  const isDragBoard = useRecoilValue(dragBoard);
+  const isDragCard = useRecoilValue(dragCard);
   const { register, setValue, handleSubmit } = useForm<IForm>();
   const onValid = ({ toDo }: IForm) => {
     const newToDo: IToDo = {
@@ -116,9 +131,10 @@ function Board({ boardId, boardIdx, toDos }: IBoardProps) {
               {...register("toDo", { required: true })}
               type="text"
               placeholder={`Add task on ${boardId}`}
+              autoComplete="off"
             />
           </InputForm>
-          <Droppable droppableId={boardId} isDropDisabled={isDragBoard}>
+          <Droppable droppableId={boardId} isDropDisabled={!isDragCard}>
             {(cardProvider, cardSnapshot) => (
               <CardDropArea
                 isDraggingOver={cardSnapshot.isDraggingOver}
