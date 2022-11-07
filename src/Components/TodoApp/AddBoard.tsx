@@ -12,12 +12,13 @@ const Dialog = styled(motion.div)`
   justify-content: space-between;
   align-items: center;
   border-radius: 10px;
-  background-color: ${(props) => props.theme.boardColor};
+  background: linear-gradient(#00000090, #00000000);
+  position: relative;
 `;
 const Title = styled.h2`
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 700;
-  color: ${(props) => props.theme.textColor};
+  color: white;
   margin-top: 10px;
 `;
 const InputName = styled.input`
@@ -25,6 +26,16 @@ const InputName = styled.input`
   height: 50px;
   display: flex;
   align-items: center;
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid white;
+  outline: none;
+  &::placeholder {
+    color: #ffffff90;
+  }
 `;
 const BtnWrapper = styled.div`
   width: 100%;
@@ -37,22 +48,32 @@ const Button = styled.button`
   width: 230px;
   height: 50px;
   border: none;
-  border-radius: 10px;
+  border-radius: 15px;
   font-size: 18px;
   color: white;
-  &:hover {
-    filter: brightness(80%);
-  }
-  transition: filter 0.3s ease-out;
+  transition: border 0.3s ease-out;
 `;
 const Obutton = styled(Button)`
   background-color: #54bab9;
+  border: 1px solid #54bab9;
+  &:hover {
+    border: 2px solid white;
+  }
 `;
 const NButton = styled(Button)`
-  background-color: #ff9f9f;
+  background-color: tomato;
+  border: 1px solid tomato;
+  &:hover {
+    border: 2px solid white;
+  }
 `;
 const AlertText = styled.span`
+  width: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 15px;
+  background: linear-gradient(90deg, #00000000, #00000050, #00000000);
   color: tomato;
   position: absolute;
   top: 170px;
@@ -102,6 +123,7 @@ function AddBoard() {
           type="text"
           placeholder="Please type a new table name"
           onChange={onChangeHandler}
+          autoComplete="off"
         />
       </form>
       {isAlert ? <AlertText>Please enter table name</AlertText> : null}

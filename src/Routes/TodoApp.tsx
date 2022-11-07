@@ -29,24 +29,40 @@ const BoardsWrapper = styled.div`
   width: 100%;
   height: 100%;
   overflow: scroll;
+  /* width */
+  &::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  /* Track */
+  &::-webkit-scrollbar-corner,
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: ${(props) => props.theme.cardColor};
+    border-radius: 5px;
+  }
 `;
 const AddBtn = styled.button`
-  width: 40px;
+  width: 130px;
   height: 40px;
-  border: none;
+  border: 2px solid ${(props) => props.theme.cardColor};
   border-radius: 20px;
   font-size: 18px;
   font-weight: 700;
-  color: ${(props) => props.theme.textColor};
-  background-color: ${(props) => props.theme.boardColor};
   position: fixed;
   top: 5px;
   right: 20px;
   z-index: 1;
+  color: ${(props) => props.theme.cardColor};
+  background-color: ${(props) => props.theme.bgColor};
   &:hover {
-    filter: brightness(80%);
+    color: ${(props) => props.theme.bgColor};
+    background-color: ${(props) => props.theme.cardColor};
   }
-  transition: filter 0.3s ease-out;
+  transition: background-color 0.3s ease-out, color 0.3s ease-out;
 `;
 
 interface IAreaProps {
@@ -70,7 +86,8 @@ const DialogBGVariants: Variants = {
 const DialogBack = styled(motion.div)`
   width: 100vw;
   height: 100vh;
-  background-color: #00000050;
+  background-color: #00000030;
+  backdrop-filter: blur(2px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -192,7 +209,7 @@ function TodoApp() {
         ) : null}
       </AnimatePresence>
       <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
-        <AddBtn onClick={() => setIsViewBoardDialog(true)}>+</AddBtn>
+        <AddBtn onClick={() => setIsViewBoardDialog(true)}>+ Add Table</AddBtn>
         <Trashcan isVisible={trashVisible} />
         <BoardsWrapper>
           <Droppable
