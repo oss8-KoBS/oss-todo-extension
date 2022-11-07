@@ -42,6 +42,11 @@ export const dragBoard = atom<boolean>({
   default: true,
 });
 
+export const dragCard = atom<boolean>({
+  key: "dragCard",
+  default: true,
+});
+
 export const addBoardDialog = atom<boolean>({
   key: "addBoardDialog",
   default: false,

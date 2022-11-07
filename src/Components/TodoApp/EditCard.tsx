@@ -1,23 +1,12 @@
 import styled from "styled-components";
+import { motion, Variants } from "framer-motion";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { editCardDialog, IToDo, IToDoState, toDoState } from "../../atoms";
 
-const Wrapper = styled.div`
-  width: 100vw;
-  height: 100vh;
-  background-color: #00000050;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  right: 0;
-  z-index: 3;
-`;
-const Dialog = styled.div`
+const Dialog = styled(motion.div)`
   width: 500px;
   height: 320px;
   display: flex;
@@ -26,7 +15,6 @@ const Dialog = styled.div`
   align-items: center;
   border-radius: 10px;
   background-color: ${(props) => props.theme.boardColor};
-  position: relative;
 `;
 const TitleWrapper = styled.div`
   width: 500px;
@@ -72,6 +60,12 @@ const ResetBtn = styled.button`
   }
   transition: filter 0.3s ease-out;
 `;
+
+const EditCardVariants: Variants = {
+  init: { scale: 0 },
+  ani: { scale: 1 },
+  exit: { scale: 0, opacity: 0 },
+};
 
 function EditCard() {
   const [cardId, setIsViewDialog] = useRecoilState(editCardDialog);
@@ -151,21 +145,26 @@ function EditCard() {
   };
 
   return (
-    <Wrapper>
-      <Dialog>
-        <TitleWrapper>
-          <Title>{cardObj?.text}</Title>
-          <CloseBtn onClick={() => setIsViewDialog(null)}>X</CloseBtn>
-        </TitleWrapper>
-        <DateWrapper>
-          <div style={{ height: "100%" }}>
-            <DatePicker selected={expireDate} onChange={onChange} inline />
-          </div>
-          <span style={{ margin: "0 20px" }}>or</span>
-          <ResetBtn onClick={onClick}>no expire</ResetBtn>
-        </DateWrapper>
-      </Dialog>
-    </Wrapper>
+    <Dialog
+      key="EditCard"
+      variants={EditCardVariants}
+      transition={{ type: "spring", stiffness: 120, damping: 10 }}
+      initial="init"
+      animate="ani"
+      exit="exit"
+    >
+      <TitleWrapper>
+        <Title>{cardObj?.text}</Title>
+        <CloseBtn onClick={() => setIsViewDialog(null)}>X</CloseBtn>
+      </TitleWrapper>
+      <DateWrapper>
+        <div style={{ height: "100%" }}>
+          <DatePicker selected={expireDate} onChange={onChange} inline />
+        </div>
+        <span style={{ margin: "0 20px" }}>or</span>
+        <ResetBtn onClick={onClick}>no expire</ResetBtn>
+      </DateWrapper>
+    </Dialog>
   );
 }
 

@@ -1,3 +1,4 @@
+import { AnimatePresence, Variants, motion } from "framer-motion";
 import React, { useState } from "react";
 import {
   DragDropContext,
@@ -10,6 +11,7 @@ import styled from "styled-components";
 import {
   addBoardDialog,
   dragBoard,
+  dragCard,
   editCardDialog,
   IToDoState,
   toDoState,
@@ -60,9 +62,28 @@ const BoardDropArea = styled.div<IAreaProps>`
   padding: 10px 10px;
 `;
 
+const DialogBGVariants: Variants = {
+  init: { opacity: 0 },
+  ani: { opacity: 1 },
+  exit: { opacity: 0 },
+};
+const DialogBack = styled(motion.div)`
+  width: 100vw;
+  height: 100vh;
+  background-color: #00000050;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 3;
+`;
+
 function TodoApp() {
   const [toDos, setToDos] = useRecoilState(toDoState);
   const [isDragBoard, setIsDragBoard] = useRecoilState(dragBoard);
+  const [isDragCard, setIsDragCard] = useRecoilState(dragCard);
   const [trashVisible, setTrashVisible] = useState(false);
   const [isViewBoardDialog, setIsViewBoardDialog] =
     useRecoilState(addBoardDialog);
@@ -153,8 +174,20 @@ function TodoApp() {
 
   return (
     <Wrapper>
-      {isViewBoardDialog ? <AddBoard /> : null}
-      {isViewCardDialog ? <EditCard /> : null}
+      <AnimatePresence>
+        {isViewBoardDialog || isViewCardDialog ? (
+          <DialogBack
+            key="DialogBack"
+            variants={DialogBGVariants}
+            initial="init"
+            animate="ani"
+            exit="exit"
+          >
+            {isViewBoardDialog ? <AddBoard /> : null}
+            {isViewCardDialog ? <EditCard /> : null}
+          </DialogBack>
+        ) : null}
+      </AnimatePresence>
       <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
         <AddBtn onClick={() => setIsViewBoardDialog(true)}>+</AddBtn>
         <Trashcan isVisible={trashVisible} />

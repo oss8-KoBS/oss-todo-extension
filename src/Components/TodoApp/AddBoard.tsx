@@ -1,21 +1,10 @@
 import React, { useState } from "react";
 import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
+import { motion, Variants } from "framer-motion";
 import { addBoardDialog, toDoState } from "../../atoms";
 
-const Wrapper = styled.div`
-  width: 100vw;
-  height: 100vh;
-  background-color: #00000050;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  right: 0;
-  z-index: 3;
-`;
-const Dialog = styled.div`
+const Dialog = styled(motion.div)`
   width: 500px;
   height: 300px;
   display: flex;
@@ -24,7 +13,6 @@ const Dialog = styled.div`
   align-items: center;
   border-radius: 10px;
   background-color: ${(props) => props.theme.boardColor};
-  position: relative;
 `;
 const Title = styled.h2`
   font-size: 18px;
@@ -70,6 +58,12 @@ const AlertText = styled.span`
   top: 170px;
 `;
 
+const AddBoardVariants: Variants = {
+  init: { scale: 0 },
+  ani: { scale: 1 },
+  exit: { scale: 0, opacity: 0 },
+};
+
 function AddBoard() {
   const setIsViewDialog = useSetRecoilState(addBoardDialog);
   const [title, setTitle] = useState("");
@@ -94,23 +88,28 @@ function AddBoard() {
     }
   };
   return (
-    <Wrapper>
-      <Dialog>
-        <Title>Add a new table</Title>
-        <form onSubmit={createHandler}>
-          <InputName
-            type="text"
-            placeholder="Please type a new table name"
-            onChange={onChangeHandler}
-          />
-        </form>
-        {isAlert ? <AlertText>Please enter table name</AlertText> : null}
-        <BtnWrapper>
-          <NButton onClick={() => setIsViewDialog(false)}>Cancel</NButton>
-          <Obutton onClick={createHandler}>Create</Obutton>
-        </BtnWrapper>
-      </Dialog>
-    </Wrapper>
+    <Dialog
+      key="AddBoard"
+      variants={AddBoardVariants}
+      transition={{ type: "spring", stiffness: 120, damping: 10 }}
+      initial="init"
+      animate="ani"
+      exit="exit"
+    >
+      <Title>Add a new table</Title>
+      <form onSubmit={createHandler}>
+        <InputName
+          type="text"
+          placeholder="Please type a new table name"
+          onChange={onChangeHandler}
+        />
+      </form>
+      {isAlert ? <AlertText>Please enter table name</AlertText> : null}
+      <BtnWrapper>
+        <NButton onClick={() => setIsViewDialog(false)}>Cancel</NButton>
+        <Obutton onClick={createHandler}>Create</Obutton>
+      </BtnWrapper>
+    </Dialog>
   );
 }
 
