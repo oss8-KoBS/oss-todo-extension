@@ -76,6 +76,7 @@ const BoardDropArea = styled.div<IAreaProps>`
   align-items: flex-start;
   justify-content: flex-start;
   padding: 10px 10px;
+  float: left;
 `;
 
 const DialogBGVariants: Variants = {

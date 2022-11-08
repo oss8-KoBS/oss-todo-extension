@@ -15,6 +15,7 @@ const BoardWrapper = styled.div<{ isDragging: boolean }>`
   padding: 10px 0;
   border-radius: 5px;
   position: relative;
+  overflow: hidden;
 
   background-color: ${(props) =>
     props.isDragging ? props.theme.cardColor : props.theme.boardColor};
@@ -32,7 +33,6 @@ const DelBtn = styled.button`
   width: 40px;
   height: 40px;
   border: none;
-  border-top-right-radius: 5px;
   background-color: transparent;
   color: tomato;
   font-size: 20px;

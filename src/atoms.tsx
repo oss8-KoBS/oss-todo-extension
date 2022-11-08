@@ -27,12 +27,12 @@ export interface IToDoState {
 export const toDoState = atom<IToDoState>({
   key: "toDo",
   default: {
-    "To Do": [{ id: 1, text: "Write To Do", expDate: currDate }],
+    "To Do": [{ id: 1, text: "Write To Do", expDate: afterDayDate }],
     Doing: [
       { id: 2, text: "Write Doing", expDate: afterDayDate },
       { id: 4, text: "Type todo press enter", expDate: null },
     ],
-    Done: [{ id: 3, text: "Write Done", expDate: afterDayDate }],
+    Done: [{ id: 3, text: "Write Done", expDate: currDate }],
   },
   effects_UNSTABLE: [persistAtom],
 });
