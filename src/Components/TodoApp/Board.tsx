@@ -155,7 +155,8 @@ function Board({ boardId, boardIdx, toDos }: IBoardProps) {
                     timeLeft={
                       todo.expDate !== null
                         ? Math.ceil(
-                            (todo.expDate?.getTime() - today.getTime()) /
+                            (new Date(todo.expDate).getTime() -
+                              today.getTime()) /
                               (1000 * 60 * 60 * 24)
                           )
                         : null
