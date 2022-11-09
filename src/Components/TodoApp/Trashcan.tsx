@@ -25,10 +25,20 @@ const Area = styled.div<IAreaProps>`
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-top: 5px;
+  padding-left: calc(50% - 130px);
+  color: white;
+  background: linear-gradient(#ff6347 90%, #00000000);
+  opacity: ${(props) => (props.isDraggingOver ? 1 : 0)};
+  transition: opacity 0.3s ease-out;
 
-  background-color: ${(props) =>
-    props.isDraggingOver ? "tomato" : "transparent"};
-  transition: background-color 0.3s ease-out;
+  position: relative;
+  & > span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 `;
 
 interface ITrashcan {
@@ -46,6 +56,7 @@ function Trashcan({ isVisible }: ITrashcan) {
             {...provider.droppableProps}
           >
             {provider.placeholder}
+            <span>Remove Card</span>
           </Area>
         )}
       </Droppable>

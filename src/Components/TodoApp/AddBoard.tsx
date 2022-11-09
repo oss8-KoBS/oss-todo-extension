@@ -35,6 +35,7 @@ const InputName = styled.input`
   outline: none;
   &::placeholder {
     color: #ffffff90;
+    font-weight: 400;
   }
 `;
 const BtnWrapper = styled.div`
@@ -51,20 +52,18 @@ const Button = styled.button`
   border-radius: 15px;
   font-size: 18px;
   color: white;
-  transition: border 0.3s ease-out;
+  transition: background-color 0.3s ease-out;
 `;
 const Obutton = styled(Button)`
-  background-color: #54bab9;
-  border: 1px solid #54bab9;
+  background-color: #54bab9c0;
   &:hover {
-    border: 2px solid white;
+    background-color: #54bab9;
   }
 `;
 const NButton = styled(Button)`
-  background-color: tomato;
-  border: 1px solid tomato;
+  background-color: #ff6347c0;
   &:hover {
-    border: 2px solid white;
+    background-color: #ff6347;
   }
 `;
 const AlertText = styled.span`

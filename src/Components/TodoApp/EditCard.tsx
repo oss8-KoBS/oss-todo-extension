@@ -16,6 +16,7 @@ const Dialog = styled(motion.div)`
   align-items: center;
   border-radius: 10px;
   background: linear-gradient(#00000090, #00000000);
+  overflow: hidden;
 `;
 const TitleWrapper = styled.div`
   width: 500px;
@@ -41,7 +42,6 @@ const CloseBtn = styled.button`
   width: 40px;
   height: 40px;
   border: none;
-  border-top-right-radius: 5px;
   background-color: transparent;
   color: tomato;
   font-size: 20px;

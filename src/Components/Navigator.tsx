@@ -18,6 +18,7 @@ const ButtonWrapper = styled.button`
   height: 50px;
   background-color: transparent;
   border: none;
+  padding: 1px 0;
 `;
 const ButtonTitle = styled.h1<{ isSelected: boolean }>`
   width: 100px;

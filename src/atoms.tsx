@@ -10,11 +10,10 @@ export const navState = atom<"TODO" | "THEME" | "CLOCK">({
   default: "TODO",
 });
 
-const { persistAtom } = recoilPersist({
+const { persistAtom: persistTodo } = recoilPersist({
   key: "todoLocal",
   storage: localStorage,
 });
-
 export interface IToDo {
   id: number;
   text: string;
@@ -27,14 +26,24 @@ export interface IToDoState {
 export const toDoState = atom<IToDoState>({
   key: "toDo",
   default: {
-    "To Do": [{ id: 1, text: "Write To Do", expDate: currDate }],
+    "To Do": [{ id: 1, text: "Write To Do", expDate: afterDayDate }],
     Doing: [
       { id: 2, text: "Write Doing", expDate: afterDayDate },
       { id: 4, text: "Type todo press enter", expDate: null },
     ],
-    Done: [{ id: 3, text: "Write Done", expDate: afterDayDate }],
+    Done: [{ id: 3, text: "Write Done", expDate: currDate }],
   },
-  effects_UNSTABLE: [persistAtom],
+  effects_UNSTABLE: [persistTodo],
+});
+
+const { persistAtom: persistTheme } = recoilPersist({
+  key: "themeLocal",
+  storage: localStorage,
+});
+export const themeState = atom<"DEFAULT" | "RED">({
+  key: "currentTheme",
+  default: "DEFAULT",
+  effects_UNSTABLE: [persistTheme],
 });
 
 export const dragBoard = atom<boolean>({
