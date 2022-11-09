@@ -88,10 +88,12 @@ interface IBoardProps {
 interface IForm {
   toDo: string;
 }
+
 function Board({ boardId, boardIdx, toDos }: IBoardProps) {
   const setToDos = useSetRecoilState(toDoState);
   const isDragCard = useRecoilValue(dragCard);
   const { register, setValue, handleSubmit } = useForm<IForm>();
+  const today = new Date();
   const onValid = ({ toDo }: IForm) => {
     const newToDo: IToDo = {
       id: Date.now(),
@@ -150,6 +152,14 @@ function Board({ boardId, boardIdx, toDos }: IBoardProps) {
                     cardIdx={cardIdx}
                     cardId={todo.id}
                     cardText={todo.text}
+                    timeLeft={
+                      todo.expDate !== null
+                        ? Math.ceil(
+                            (todo.expDate?.getTime() - today.getTime()) /
+                              (1000 * 60 * 60 * 24)
+                          )
+                        : null
+                    }
                   />
                 ))}
                 {cardProvider.placeholder}

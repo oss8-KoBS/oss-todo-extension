@@ -55,6 +55,7 @@ function Trashcan({ isVisible }: ITrashcan) {
             ref={provider.innerRef}
             {...provider.droppableProps}
           >
+            {provider.placeholder}
             <span>Remove Card</span>
           </Area>
         )}
