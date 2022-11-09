@@ -20,7 +20,7 @@ const Text = styled.span`
   word-break: break-all;
   color: ${(props) => props.theme.textColor};
 `;
-const TimeLeft = styled.div`
+const TimeLeft = styled.div<{ isExpired: boolean }>`
   width: 100%;
   height: 100%;
   position: absolute;
@@ -33,7 +33,7 @@ const TimeLeft = styled.div`
   font-size: 50px;
   font-weight: 700;
   font-style: italic;
-  color: ${(props) => props.theme.textColor};
+  color: ${(props) => (props.isExpired ? "tomato" : props.theme.textColor)};
   opacity: 0.1;
   white-space: nowrap;
   overflow: hidden;
@@ -62,9 +62,13 @@ function Card({ cardId, cardIdx, cardText, timeLeft }: ICardProps) {
           {...cardProvided.dragHandleProps}
         >
           <Text>{cardText}</Text>
-          <TimeLeft>
+          <TimeLeft
+            isExpired={timeLeft === null ? false : timeLeft <= 0 ? true : false}
+          >
             {timeLeft !== null
-              ? timeLeft === 0
+              ? timeLeft < 0
+                ? `D+${-timeLeft}`
+                : timeLeft === 0
                 ? "D-Day"
                 : `D-${timeLeft}`
               : null}
