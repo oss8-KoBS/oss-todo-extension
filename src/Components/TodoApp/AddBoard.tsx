@@ -87,7 +87,7 @@ const AddBoardVariants: Variants = {
 function AddBoard() {
   const setIsViewDialog = useSetRecoilState(addBoardDialog);
   const [title, setTitle] = useState("");
-  const [isAlert, setIsAlert] = useState(false);
+  const [isAlert, setIsAlert] = useState<false | "NONAME" | "EXISTNAME">(false);
   const setToDos = useSetRecoilState(toDoState);
 
   const onChangeHandler = (e: React.FormEvent<HTMLInputElement>) => {
@@ -96,15 +96,31 @@ function AddBoard() {
   };
   const createHandler = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    if (title.replace(/ /g, "").length > 0) {
-      setToDos((prev) => ({
-        ...prev,
-        [title]: [],
-      }));
+    let isExsist = false;
 
-      setIsViewDialog(false);
+    if (title.replace(/ /g, "").length > 0) {
+      setToDos((prev) => {
+        Object.keys(prev).forEach((key) => {
+          if (key === title) {
+            isExsist = true;
+          }
+        });
+        if (isExsist) {
+          setIsAlert("EXISTNAME");
+          return prev;
+        }
+
+        return {
+          ...prev,
+          [title]: [],
+        };
+      });
+
+      if (!isExsist) {
+        setIsViewDialog(false);
+      }
     } else {
-      setIsAlert(true);
+      setIsAlert("NONAME");
     }
   };
   return (
@@ -125,7 +141,13 @@ function AddBoard() {
           autoComplete="off"
         />
       </form>
-      {isAlert ? <AlertText>Please enter table name</AlertText> : null}
+      {isAlert ? (
+        <AlertText>
+          {isAlert === "NONAME"
+            ? "Please enter table name"
+            : `${title} table is already exist`}
+        </AlertText>
+      ) : null}
       <BtnWrapper>
         <NButton onClick={() => setIsViewDialog(false)}>Cancel</NButton>
         <Obutton onClick={createHandler}>Create</Obutton>
