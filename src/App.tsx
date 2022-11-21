@@ -1,8 +1,21 @@
 import { AnimatePresence, motion, Variants } from "framer-motion";
 import { useRecoilValue } from "recoil";
 import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
-import { navState } from "./atoms";
-import { defaultTheme } from "./theme";
+import { navState, themeState } from "./atoms";
+import {
+  avocadoTheme,
+  blackTheme,
+  christmasTheme,
+  defaultTheme,
+  eggTheme,
+  greenTheme,
+  kakaoTheme,
+  orangeTheme,
+  peachTheme,
+  purpleTheme,
+  redTheme,
+  skyTheme,
+} from "./theme";
 import Navigator from "./Components/Navigator";
 import ClockApp from "./Routes/ClockApp";
 import ThemeApp from "./Routes/ThemeApp";
@@ -122,9 +135,36 @@ const AppWrapperVariants: Variants = {
 
 function App() {
   const currentNav = useRecoilValue(navState);
+  const currTheme = useRecoilValue(themeState);
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider
+      theme={
+        currTheme === "RED"
+          ? redTheme
+          : currTheme === "BLACK"
+          ? blackTheme
+          : currTheme === "PURPLE"
+          ? purpleTheme
+          : currTheme === "GREEN"
+          ? greenTheme
+          : currTheme === "PEACH"
+          ? peachTheme
+          : currTheme === "ORANGE"
+          ? orangeTheme
+          : currTheme === "AVOCADO"
+          ? avocadoTheme
+          : currTheme === "EGG"
+          ? eggTheme
+          : currTheme === "KAKAO"
+          ? kakaoTheme
+          : currTheme === "CHRISTMAS"
+          ? christmasTheme
+          : currTheme === "SKY"
+          ? skyTheme
+          : defaultTheme
+      }
+    >
       <GlobalStyle />
       <Wrapper>
         <AnimatePresence>
