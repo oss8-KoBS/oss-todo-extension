@@ -36,12 +36,12 @@ export const toDoState = atom<IToDoState>({
   effects_UNSTABLE: [persistTodo],
 });
 
-const { persistAtom: persistTheme } = recoilPersist({
+const { persistAtom: persistTheme } = recoilPersist({   //theme을 위한 전역변수1
   key: "themeLocal",
   storage: localStorage,
 });
-export const themeState = atom<"DEFAULT" | "RED">({
-  key: "currentTheme",
+export const themeState = atom<"DEFAULT" | "RED" | "BLACK" | "PURPLE" | "GREEN" | "PEACH" | "ORANGE" | "AVOCADO" | "EGG" | "KAKAO" | "CHRISTMAS" | "SKY">({  // |입력하고 적용하는 테마의 이름 입력하기 (default,red있으니 10개 더 추가)
+  key: "currentTheme",                               //theme을 위한 전역변수2
   default: "DEFAULT",
   effects_UNSTABLE: [persistTheme],
 });
