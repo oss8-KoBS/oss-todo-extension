@@ -11,8 +11,10 @@
     "@types/react": "^18.0.20",
     "@types/react-dom": "^18.0.6",
     "framer-motion": "^7.3.5",
+    "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-beautiful-dnd": "^13.1.1",
+    "react-calendar": "^4.0.0",
     "react-datepicker": "^4.8.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.38.0",
@@ -50,6 +52,7 @@
   "devDependencies": {
     "@types/chrome": "^0.0.197",
     "@types/react-beautiful-dnd": "^13.1.2",
+    "@types/react-calendar": "^3.5.3",
     "@types/react-datepicker": "^4.8.0",
     "@types/styled-components": "^5.1.26"
   }
