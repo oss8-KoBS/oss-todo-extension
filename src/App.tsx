@@ -46,7 +46,7 @@ time, mark, audio, video {
 	border: 0;
 	font-size: 100%;
 	font: inherit;
-	font-family: 'Baloo Thambi 2', 'Nanum Gothic Coding', Verdana;
+	font-family: 'Baloo Thambi 2', 'Nanum Gothic', Verdana;
 	vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
@@ -75,7 +75,7 @@ table {
 
 * {
   box-sizing: border-box;
-	font-family: 'Baloo Thambi 2', 'Nanum Gothic Coding', Verdana;
+	font-family: 'Baloo Thambi 2', 'Nanum Gothic', Verdana;
 	-webkit-user-select:none;
   -moz-user-select:none;
   -ms-user-select:none;
