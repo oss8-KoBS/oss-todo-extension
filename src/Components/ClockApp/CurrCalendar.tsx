@@ -7,7 +7,6 @@ import { useRecoilValue } from "recoil";
 import { toDoState } from "../../atoms";
 
 const CalendarPrt = styled.div`
-  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
