@@ -35,7 +35,7 @@ const ButtonWrapper = styled.div`
 `;
 
 const Button=styled.button<{bgColor: string}>`
-boder:none;
+border: 1.5px solid black;
 border-radius:20px;
 height: 80px;
 width: 160px;
