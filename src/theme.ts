@@ -57,9 +57,9 @@ export const greenTheme: DefaultTheme ={
 
   bgColor: "#159957",
 
-  boardColor: "#DADFE9",
-  startBoardColor: "#B6E2A1", 
-  dropBoardColor: "#829460",  
+  boardColor: "#11998e",
+  startBoardColor: "#a8e063", 
+  dropBoardColor: "#45B649",  
 
   cardColor: "#FFFFFF",
   dragCardColor: "#74B9FF",
@@ -83,9 +83,9 @@ export const orangeTheme: DefaultTheme ={
 
   bgColor: "#FF8008",
 
-  boardColor: "#D96C07",
-  startBoardColor: "#B2BEC3", 
-  dropBoardColor: "#BFD6C9",  
+  boardColor: "#FDC830",
+  startBoardColor: "#FFFBBE", 
+  dropBoardColor: "#F37335",  
 
   cardColor: "#FFFFFF",
   dragCardColor: "#74B9FF",
@@ -96,9 +96,9 @@ export const avocadoTheme: DefaultTheme ={
 
   bgColor: "#799F0C",
 
-  boardColor: "#605C3C",
-  startBoardColor: "#B2BEC3", 
-  dropBoardColor: "#BFD6C9",  
+  boardColor: "#C36A2D",
+  startBoardColor: "#E6BA95", 
+  dropBoardColor: "#C7B198",  
 
   cardColor: "#FFFFFF",   
   dragCardColor: "#74B9FF",
