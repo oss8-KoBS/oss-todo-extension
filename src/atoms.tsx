@@ -29,23 +29,36 @@ export interface IToDoState {
 export const toDoState = atom<IToDoState>({
   key: "toDo",
   default: {
-    "To Do": [{ id: 1, text: "Write To Do", expDate: afterDayDate }],
+    "To Do": [{ id: 1, text: "Write To Do", expDate: null }],
     Doing: [
-      { id: 2, text: "Write Doing", expDate: afterDayDate },
+      { id: 2, text: "Write Doing", expDate: null },
       { id: 4, text: "Type todo press enter", expDate: null },
     ],
-    Done: [{ id: 3, text: "Write Done", expDate: currDate }],
+    Done: [{ id: 3, text: "Write Done", expDate: null }],
   },
   effects_UNSTABLE: [persistTodo],
 });
 
-const { persistAtom: persistTheme } = recoilPersist({  
+const { persistAtom: persistTheme } = recoilPersist({
   key: "themeLocal",
   storage: localStorage,
 });
 
-export const themeState = atom<"DEFAULT" | "RED" | "BLACK" | "PURPLE" | "GREEN" | "PEACH" | "ORANGE" | "AVOCADO" | "PASTEL" | "KAKAO" | "CHRISTMAS" | "SKY">({ 
-  key: "currentTheme",                              
+export const themeState = atom<
+  | "DEFAULT"
+  | "RED"
+  | "BLACK"
+  | "PURPLE"
+  | "GREEN"
+  | "PEACH"
+  | "ORANGE"
+  | "AVOCADO"
+  | "PASTEL"
+  | "KAKAO"
+  | "CHRISTMAS"
+  | "SKY"
+>({
+  key: "currentTheme",
   default: "DEFAULT",
   effects_UNSTABLE: [persistTheme],
 });

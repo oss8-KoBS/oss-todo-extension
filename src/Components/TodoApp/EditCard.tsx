@@ -98,6 +98,7 @@ function EditCard() {
         }
       });
     });
+    // eslint-disable-next-line
   }, []);
 
   const onChange = (date: Date) => {

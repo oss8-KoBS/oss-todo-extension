@@ -1,5 +1,4 @@
 # ToDo Tab (English)
-Welcome!
 
 ## Introduce
 Hi! This is ToDo Tab!\
@@ -23,6 +22,9 @@ This project is under `Apache License 2.0`.
 - framer/motion - `MIT License`
 - styled-components/styled-components - `MIT License`
 - polemius/recoil-persist - `MIT License`
+- react-hook-form/react-hook-form - `MIT License`
+- wojtekmaj/react-calendar - `MIT License`
+- Hacker0x01/react-datepicker - `MIT License`
 - atlassian/react-beautiful-dnd - `Apache License 2.0`
 
 
@@ -30,7 +32,6 @@ This project is under `Apache License 2.0`.
 
 
 # ToDo Tab (한국어)
-어서오세요!
 
 ## 소개
 안녕하세요, ToDo Tab 입니다!\
@@ -50,13 +51,11 @@ This project is under `Apache License 2.0`.
 이 프로젝트는 `Apache License 2.0` 라이센스를 따릅니다.
 
 - facebook/react - `MIT License`
-- facebookexperimental/Recoil - `MIT License`\
-  리액트의 상태관리 라이브러리 입니다. (일정, 테마 등등의 상태를 저장합니다)
-- framer/motion - `MIT License`\
-  화면전환의 애니메이션을 쉽게 추가할 수 있도록 도와주는 라이브러리 입니다.
-- styled-components/styled-components - `MIT License`\
-  JSX 코드 작성시 html, css작성을 편리하게 해주는 라이브러리 입니다.
-- polemius/recoil-persist - `MIT License`\
-  recoil을 이용해 브라우저의 local storage를 쉽게 동기화 시켜주는 라이브러리 입니다.
-- atlassian/react-beautiful-dnd - `Apache License 2.0`\
-  드래그 앤 드롭 기능을 쉽게 구현할 수 있도록 도와주는 라이브러리 입니다.
+- facebookexperimental/Recoil - `MIT License`
+- framer/motion - `MIT License`
+- styled-components/styled-components - `MIT License`
+- polemius/recoil-persist - `MIT License`
+- react-hook-form/react-hook-form - `MIT License`
+- wojtekmaj/react-calendar - `MIT License`
+- Hacker0x01/react-datepicker - `MIT License`
+- atlassian/react-beautiful-dnd - `Apache License 2.0`
