@@ -1,8 +1,54 @@
 import { useEffect, useState } from "react";
+import styled from "styled-components"
+
+
+const Box = styled.div`
+padding : 10px;
+margin-top : 15px;
+`
+
+const Bottom = styled.div`
+  display : flex;
+  justify-content : space-evenly;
+  text-align : center;
+  width : 100%;
+  margin : 1rem auto;
+  margin-top : 50px
+`
+const Result_Wrap = styled.div`
+`
+
+const Ptag = styled.div`
+  padding : 8px;
+`
+const Wrap = styled.div`
+  
+    left: 20%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    padding: 35px;
+
+    margin-top: 60px;
+    border: 1px black solid;
+    border-radius: 8px;
+  `;
+
+function Unix_timestamp(t: number) {
+  let date = new Date(t * 1000);
+  let year = date.getFullYear();
+  let month = "0" + (date.getMonth() + 1);
+  let day = "0" + date.getDate();
+  let hour = "0" + date.getHours();
+  let minute = "0" + date.getMinutes();
+  let second = "0" + date.getSeconds();
+  return year + "-" + month.substr(-2) + "-" + day.substr(-2) + " " + hour.substr(-2) + ":" + minute.substr(-2) + ":" + second.substr(-2);
+}
+
 
 // OpenWeather API를 사용하기 위한 API key 입니다.
 // Woong의 계정을 사용했습니다.
-const API_KEY = "27c1eb3309e9989c58c8506ce75ae82f";
+const API_KEY = "aac89a3088cd9eb6836eff8e3da71980";
 
 // 아래의 인터페이스 정보를 입력했기에 자동 완성 기능이 제공됩니다.
 // 위치 정보에 대한 인터페이스 입니다.
@@ -59,33 +105,68 @@ function CurrWeather() {
   // 가져올 수 있는 정보는 아래와 같습니다.
   // 이 데이터를 토대로 화면을 이쁘게 구성해주세요!
   return (
-    <>
+
+
+    <Result_Wrap>
       {isLoading ? (
         <span>Loading...</span>
       ) : (
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <span>구름양: {weather?.clouds.all}</span>
+        <Wrap>
 
-          <span>온도: {weather?.main.temp}</span>
-          <span>체감온도: {weather?.main.feels_like}</span>
-          <span>습도: {weather?.main.humidity}</span>
+          <div style={{ display: "flex", flexDirection: "column", fontSize: "20px" }}>
 
-          <span>위치: {weather?.name}</span>
+            <h2 style={{ color: "white" , fontSize: "40px"}}>{weather?.name}</h2>
+            <div style={{ color: "white", fontSize: "65px"}}> {weather ? (weather.main.temp - 273.13).toFixed(1) + "°C" : "-"}</div>
 
-          <span>일출: {weather?.sys.sunrise}</span>
-          <span>일몰: {weather?.sys.sunset}</span>
-          <span>타임존(일출/일몰 계산용): {weather?.timezone}</span>
+            <Box>일출 : {weather ? Unix_timestamp(weather.sys.sunrise) : "-"}</Box>
+            <Box>일몰 : {weather ? Unix_timestamp(weather.sys.sunset) : "-"}</Box>
 
-          <span>날씨: {weather?.weather[0].main}</span>
-          <span>날씨 설명: {weather?.weather[0].description}</span>
-          <span>날씨id: {weather?.weather[0].id}</span>
-          <span>날씨icon: {weather?.weather[0].icon}</span>
+            <Bottom>
+              <div className="feels">
+                {weather ? (weather.main.feels_like - 273.13).toFixed(1) + "°C" : "-"}
+                <Ptag>체감온도</Ptag>
+              </div>
+              <div className="humidity">
+                {weather?.main.humidity+"%"}
+                <Ptag>습도</Ptag>
+              </div>
+              <div className="blow">
+                {weather?.wind.speed + "m/s"}
+                <Ptag>풍속</Ptag>
+              </div>
+{/* 
 
-          <span>풍속: {weather?.wind.speed}</span>
-          <span>풍향: {weather?.wind.deg}</span>
-        </div>
+              <Box>체감온도: {weather ? (weather.main.feels_like - 273.13).toFixed(1) + "°C" : "-"}</Box>
+              <Box>습도: {weather?.main.humidity}</Box>
+
+              <Box>습도: {weather?.main.humidity}</Box>
+              <Box>일출: {weather ? Unix_timestamp(weather.sys.sunrise) : "-"}</Box>
+              <Box>일몰: {weather ? Unix_timestamp(weather.sys.sunset) : "-"}</Box>
+
+              <Box>날씨: {weather?.weather[0].main}</Box>
+              <Box>날씨 상세: {weather?.weather[0].description}</Box>
+              <Box>풍속: {weather?.wind.speed + "m/s"}</Box> */}
+            </Bottom>
+
+            {/* 
+          <div className="container">
+            <div className="row">
+              <div className="col-md-4">
+                <div className="card text-white bg-secondary mb-3">
+                  <div className="card-header">Header</div>
+                  <div className="card-body">
+                    <h5 className="card-title">Secondary card title</h5>
+                    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  </div>
+                </div>
+              </div>
+            </div>*/}
+          </div> 
+        </Wrap>
       )}
-    </>
+    </Result_Wrap>
+
+
   );
 }
 
