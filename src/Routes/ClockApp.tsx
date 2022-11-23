@@ -4,8 +4,17 @@ import CurrCalendar from "../Components/ClockApp/CurrCalendar";
 import CurrWeather from "../Components/ClockApp/CurrWeather";
 
 const Wrapper = styled.div`
-  width: 100%;
-  height: 100%;
+width: 100%;
+height: 100%;
+
+
+content: '';
+  background: url('sunset.jpg') no-repeat center center/cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  
 `;
 const Clock = styled.h1`
   text-align: center;
