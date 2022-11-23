@@ -7,7 +7,7 @@ import {
   blackTheme,
   christmasTheme,
   defaultTheme,
-  eggTheme,
+  pastelTheme,
   greenTheme,
   kakaoTheme,
   orangeTheme,
@@ -88,6 +88,7 @@ img {
  	-o-user-drag: none;
 }
 body {
+  transition: background-color 0.3s ease-out, color 0.3s ease-out;
   background-color: ${(props) => props.theme.bgColor};
   color: ${(props) => props.theme.textColor};
 }
@@ -154,8 +155,8 @@ function App() {
           ? orangeTheme
           : currTheme === "AVOCADO"
           ? avocadoTheme
-          : currTheme === "EGG"
-          ? eggTheme
+          : currTheme === "PASTEL"
+          ? pastelTheme
           : currTheme === "KAKAO"
           ? kakaoTheme
           : currTheme === "CHRISTMAS"

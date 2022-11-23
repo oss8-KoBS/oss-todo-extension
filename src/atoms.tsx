@@ -14,15 +14,18 @@ const { persistAtom: persistTodo } = recoilPersist({
   key: "todoLocal",
   storage: localStorage,
 });
+
 export interface IToDo {
   id: number;
   text: string;
   // expDate == null, expire date is not set.
   expDate: Date | null;
 }
+
 export interface IToDoState {
   [key: string]: IToDo[];
 }
+
 export const toDoState = atom<IToDoState>({
   key: "toDo",
   default: {
@@ -36,12 +39,13 @@ export const toDoState = atom<IToDoState>({
   effects_UNSTABLE: [persistTodo],
 });
 
-const { persistAtom: persistTheme } = recoilPersist({   //theme을 위한 전역변수1
+const { persistAtom: persistTheme } = recoilPersist({  
   key: "themeLocal",
   storage: localStorage,
 });
-export const themeState = atom<"DEFAULT" | "RED" | "BLACK" | "PURPLE" | "GREEN" | "PEACH" | "ORANGE" | "AVOCADO" | "EGG" | "KAKAO" | "CHRISTMAS" | "SKY">({  // |입력하고 적용하는 테마의 이름 입력하기 (default,red있으니 10개 더 추가)
-  key: "currentTheme",                               //theme을 위한 전역변수2
+
+export const themeState = atom<"DEFAULT" | "RED" | "BLACK" | "PURPLE" | "GREEN" | "PEACH" | "ORANGE" | "AVOCADO" | "PASTEL" | "KAKAO" | "CHRISTMAS" | "SKY">({ 
+  key: "currentTheme",                              
   default: "DEFAULT",
   effects_UNSTABLE: [persistTheme],
 });
