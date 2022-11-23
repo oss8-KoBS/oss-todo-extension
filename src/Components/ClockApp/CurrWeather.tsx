@@ -13,7 +13,7 @@ const Bottom = styled.div`
   text-align : center;
   width : 100%;
   margin : 1rem auto;
-  margin-top : 50px
+  margin-top : 49px
 `
 const Result_Wrap = styled.div`
 `
@@ -102,8 +102,6 @@ function CurrWeather() {
     }
   }, [position]);
 
-  // 가져올 수 있는 정보는 아래와 같습니다.
-  // 이 데이터를 토대로 화면을 이쁘게 구성해주세요!
   return (
 
 
@@ -134,33 +132,10 @@ function CurrWeather() {
                 {weather?.wind.speed + "m/s"}
                 <Ptag>풍속</Ptag>
               </div>
-{/* 
 
-              <Box>체감온도: {weather ? (weather.main.feels_like - 273.13).toFixed(1) + "°C" : "-"}</Box>
-              <Box>습도: {weather?.main.humidity}</Box>
-
-              <Box>습도: {weather?.main.humidity}</Box>
-              <Box>일출: {weather ? Unix_timestamp(weather.sys.sunrise) : "-"}</Box>
-              <Box>일몰: {weather ? Unix_timestamp(weather.sys.sunset) : "-"}</Box>
-
-              <Box>날씨: {weather?.weather[0].main}</Box>
-              <Box>날씨 상세: {weather?.weather[0].description}</Box>
-              <Box>풍속: {weather?.wind.speed + "m/s"}</Box> */}
             </Bottom>
 
-            {/* 
-          <div className="container">
-            <div className="row">
-              <div className="col-md-4">
-                <div className="card text-white bg-secondary mb-3">
-                  <div className="card-header">Header</div>
-                  <div className="card-body">
-                    <h5 className="card-title">Secondary card title</h5>
-                    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  </div>
-                </div>
-              </div>
-            </div>*/}
+  
           </div> 
         </Wrap>
       )}
