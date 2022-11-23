@@ -1,0 +1,20 @@
+@font-face {
+  font-family: "Baloo Thambi 2";
+  src: url("./fonts/BalooThambi2R.ttf");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "Nanum Gothic";
+  src: url("./fonts/NanumGothicR.ttf");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "Baloo Thambi 2";
+  src: url("./fonts/BalooThambi2B.ttf");
+  font-weight: 700;
+}
+@font-face {
+  font-family: "Nanum Gothic";
+  src: url("./fonts/NanumGothicB.ttf");
+  font-weight: 700;
+}
