@@ -102,6 +102,14 @@ const Wrapper = styled.div`
   width: 100vw;
   height: 100vh;
   padding-top: 50px;
+  position: relative;
+  overflow: hidden;
+`;
+const WrapperBG = styled.div`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: linear-gradient(180deg, transparent 60%, #ffffff40);
 `;
 const MotionWrapper = styled(motion.div)`
   width: 100vw;
@@ -168,6 +176,7 @@ function App() {
     >
       <GlobalStyle />
       <Wrapper>
+        <WrapperBG />
         <AnimatePresence>
           <Navigator />
           {currentNav === "TODO" ? (

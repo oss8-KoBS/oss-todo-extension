@@ -4,60 +4,76 @@ import CurrCalendar from "../Components/ClockApp/CurrCalendar";
 import CurrWeather from "../Components/ClockApp/CurrWeather";
 
 const Wrapper = styled.div`
-width: 100%;
-height: 100%;
-
-
-content: '';
-  background: url('sunset.jpg') no-repeat center center/cover;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 0;
-  
-`;
-const Clock = styled.h1`
-  text-align: center;
-  position: relative;
-  font-size: 100px;
-  padding: 30px 30px 30px 30px;
-  width: 100%;
-`;
-const Calendar_Weather_area = styled.div`
-  display: flex;
-  position: relative;
   width: 100%;
   height: 100%;
+  overflow-y: scroll;
+  /* width */
+  &::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  /* Track */
+  &::-webkit-scrollbar-corner,
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: ${(props) => props.theme.cardColor};
+    border-radius: 5px;
+  }
+`;
+const Clock = styled.h1`
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 100px;
+  margin-top: 30px;
+  color: white;
+`;
+const BoxWrapper = styled.div`
+  width: 100%;
+  height: calc(100% - 210px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 `;
 const Box = styled.div`
   width: 100%;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 60px;
 `;
 
 function ClockApp() {
   const [time, setTime] = useState(new Date());
 
-  useEffect (() => {
+  useEffect(() => {
     const timer = setInterval(() => {
       setTime(new Date());
     }, 1000);
+
     return () => {
       clearInterval(timer);
     };
   }, []);
+
   return (
     <Wrapper>
-      <Clock>
-        {time.toLocaleTimeString('en-US')}
-      </Clock>
-      <Calendar_Weather_area>
+      <Clock>{time.toLocaleTimeString("en-US")}</Clock>
+      <BoxWrapper>
         <Box>
-          <CurrWeather /> // 여기에 날씨 api 들어가야 함.
+          <CurrWeather />
         </Box>
         <Box>
           <CurrCalendar />
         </Box>
-      </Calendar_Weather_area>
+      </BoxWrapper>
     </Wrapper>
   );
 }
