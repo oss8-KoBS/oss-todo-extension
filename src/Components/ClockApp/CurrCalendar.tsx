@@ -60,6 +60,7 @@ function CurrCalendar() {
   const [htt, setHtt] = useState<{ expDate: Date | null; text: string }[]>([]);
   const [currTask, setCurrTask] = useState<{ text: string }[]>([]);
   useEffect(() => {
+    // setCurrTask([]);
     Object.keys(toDos).forEach((key) => {
       toDos[key].forEach((card) => {
         if (card.expDate !== null) {
@@ -67,13 +68,6 @@ function CurrCalendar() {
             ...prev,
             { expDate: card.expDate, text: card.text },
           ]);
-          if (
-            Math.ceil(new Date().getTime() / (1000 * 60 * 60 * 24)) - 1 ===
-            Math.ceil(new Date(card.expDate).getTime() / (1000 * 60 * 60 * 24))
-          ) {
-            setCurrTask([]);
-            setCurrTask((prev) => [...prev, { text: card.text }]);
-          }
         }
       });
     });
@@ -81,6 +75,7 @@ function CurrCalendar() {
   }, []);
 
   useEffect(() => {
+    setCurrTask([]);
     htt.forEach((card) => {
       if (
         card.expDate
@@ -88,7 +83,6 @@ function CurrCalendar() {
             Math.ceil(new Date(card.expDate).getTime() / (1000 * 60 * 60 * 24))
           : false
       ) {
-        setCurrTask([]);
         setCurrTask((prev) => [...prev, { text: card.text }]);
       }
     });
