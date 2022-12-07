@@ -1,11 +1,5 @@
 # ToDo Tab (English)
 ![1](https://user-images.githubusercontent.com/66172061/203950557-d743df6c-86da-46bf-9498-28f42b5f89d8.png)
-![2](https://user-images.githubusercontent.com/66172061/203950576-e58dc402-8ea6-4ad2-bccd-d52ab9c607d6.png)
-![3](https://user-images.githubusercontent.com/66172061/203950598-286a14d1-195f-47ad-ad10-632b64b0c052.png)
-![4](https://user-images.githubusercontent.com/66172061/203950609-18a777fe-ae6f-445e-a6f2-e77b0c8ad189.png)
-![5](https://user-images.githubusercontent.com/66172061/203950620-369996be-45c2-4cc6-bf2d-9a3f791ff3c9.png)
-
-
 
 ## Introduce
 Hi! This is ToDo Tab!\
@@ -32,6 +26,8 @@ You can check the region, temperature, weather, sunrise-sunset time, perceived t
 12.	Except for number 8, all functions work perfectly offline, can be saved, and are optimized for all browser sizes. (However, data may be lost when the browser history is initialized.)
 
 ## How to install
+[Click Here to go Chrome Web Store!](https://chrome.google.com/webstore/detail/todo-tab/ljmdbcheoppaiojaajekjllfncipijjj)\
+or
 1. Go to chrome web store.
 2. Search `ToDo Tab`.
 3. Click Add Chrome button!
@@ -81,6 +77,8 @@ This project is under `Apache License 2.0`.
 
 
 ## 설치방법
+[크롭 웹스토어로 이동!](https://chrome.google.com/webstore/detail/todo-tab/ljmdbcheoppaiojaajekjllfncipijjj)\
+또는
 1. 크롬 웹 스토어에 접속합니다.
 2. `ToDo Tab`을 검색합니다.
 3. 크롬에 추가 버튼을 클릭합니다!
